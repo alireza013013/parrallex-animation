@@ -16,63 +16,128 @@ function App() {
   const durationFirstSection = 5
   const scubTime = 2
 
-  const firstSection = {
-    trigger: "#container-first-section",
-    start: "top top",
-    endTrigger: "#second-section-div",
-    end: "+=30% top",
-    scrub: scubTime,
-    toggleActions: "play none none none",
-    // markers: true,
+  // const firstSection = {
 
-  }
+  //   // trigger: "#container-first-section",
+  //   // start: "top top",
+  //   // endTrigger: "#second-section-div",
+  //   // end: "+=30% top",
+  //   // scrub: scubTime,
+  //   // toggleActions: "play none none none",
+  //   // markers: true,
+  //   trigger: "#container-first-section",
+  //   start: "-=10 top",
+  //   endTrigger: "#second-section-div",
+
+  //   // endTrigger: "#item-list",
+  //   end: "bottom top",
+  //   scrub: scubTime,
+  //   toggleActions: "play none none none",
+
+  // }
 
   useGSAP(() => {
-    gsap.to(["#main"],
-      {
-        backgroundColor: "#cccccc",
-        duration: durationFirstSection,
-        scrollTrigger: {
-          ...firstSection,
-        }
-      }
-    )
-    gsap.to(["#container-first-section"],
-      {
-        scaleX: 0.07,
-        scaleY: 0.1,
-        backgroundColor: "white",
-        borderStyle: "solid",
-        borderWidth: 4,
-        borderColor: "black",
-        borderRadius: 500,
-        duration: durationFirstSection,
-        scrollTrigger: {
-          ...firstSection,
-          pin: true,
-        }
-      }
-    )
-    gsap.to(["#main-video"],
-      {
-        borderRadius: 500,
-        opacity: 0,
-        duration: durationFirstSection,
-        scrollTrigger: {
-          ...firstSection,
-        }
-      }
-    )
+    // gsap.to(["#main"],
+    //   {
+    //     backgroundColor: "#cccccc",
+    //     duration: durationFirstSection,
+    //     scrollTrigger: {
+    //       ...firstSection,
+    //     }
+    //   }
+    // )
 
-    gsap.to(["#image-person"],
-      {
-        width: 160,
-        duration: durationFirstSection,
-        scrollTrigger: {
-          ...firstSection,
-        }
-      }
-    )
+    // gsap.to(["#container-first-section"],
+    //   {
+    //     width: 80,
+    //     height: 61,
+    //     left: "calc(50% - 40px)",
+    //     top: "calc(50% - 32px)",
+    //     backgroundColor: "white",
+    //     borderStyle: "solid",
+    //     borderWidth: 2,
+    //     borderColor: "black",
+    //     borderRadius: 20,
+    //     duration: durationFirstSection,
+    //     scrollTrigger: {
+    //       trigger: "#container-first-section",
+    //       start: "top top",
+    //       endTrigger: "#second-section-div",
+    //       end: "+=30% top",
+    //       scrub: scubTime,
+    //       toggleActions: "play none none none",
+    //       markers: true,
+    //     }
+    //   }
+    // )
+    // gsap.to(["#container-first-section"],
+    //   {
+    //     // scaleX: 0.1,
+    //     // scaleY: 0.1,
+    //     // width: 80,
+    //     // height: 60,
+    //     // left: "50%",
+    //     // top: "50%",
+    //     // backgroundColor: "white",
+    //     // borderStyle: "solid",
+    //     // borderWidth: 2,
+    //     // borderColor: "black",
+    //     // borderRadius: 500,
+    //     duration: durationFirstSection,
+    //     scrollTrigger: {
+    //       ...firstSection,
+    //       pin: true,
+    //       pinSpacing: false,
+    //       // markers: true
+    //     }
+    //   }
+    // )
+
+    // gsap.to(["#container-first-section"],
+    //   {
+    //     // opacity: 0,
+    //     // backgroundColor: "red",
+    //     duration: durationFirstSection,
+    //     scrollTrigger: {
+    //       ...firstSection,
+    //       trigger: "#second-section-div",
+    //       start: "top top",
+    //       end: "100 top",
+    //       scrub: scubTime,
+    //       toggleActions: "play none none none",
+    //       markers: true,
+    //       // pin: true,
+    //       // pinSpacing: false,
+    //     }
+    //   }
+    // )
+
+    // gsap.to(["#main-video"],
+    //   {
+    //     borderRadius: 500,
+    //     opacity: 0,
+    //     duration: durationFirstSection,
+    //     scrollTrigger: {
+    //       // ...firstSection,
+    //       trigger: "#container-first-section",
+    //       start: "top top",
+    //       endTrigger: "#second-section-div",
+    //       end: "+=30% top",
+    //       scrub: scubTime,
+    //       toggleActions: "play none none none",
+    //     }
+    //   }
+    // )
+
+    // gsap.to(["#image-person"],
+    //   {
+    //     width: 160,
+    //     duration: durationFirstSection,
+    //     scrollTrigger: {
+    //       ...firstSection,
+    //     }
+    //   }
+    // )
 
     // gsap.to(["#second-section-div"],
     //   {
@@ -80,31 +145,106 @@ function App() {
     //     opacity: 1,
     //     scrollTrigger: {
     //       trigger: "#second-section-div",
-    //       start: "top center",
-    //       end: "+=200px center",
+    //       start: "top top",
+    //       end: "center top",
     //       scrub: scubTime,
     //       toggleActions: "play none none none",
-    //       markers: true,
-    //       // pin: true
+    //       // markers: true,
+    //       pin: true,
+    //       pinSpacing: false,
     //     }
     //   }
     // )
-    // gsap.to(["#item-list"],
-    //   {
-    //     scaleX: 0.07,
-    //     scaleY: 0.1,
-    //     backgroundColor: "white",
-    //     borderStyle: "solid",
-    //     borderWidth: 4,
-    //     borderColor: "black",
-    //     borderRadius: 500,
-    //     duration: durationFirstSection,
-    //     opacity: 1,
-    //     scrollTrigger: {
-    //       ...firstSection,
-    //     }
-    //   }
-    // )
+
+
+    ScrollTrigger.create({
+      trigger: "#container-first-section",
+      start: "top top",
+      endTrigger: "#second-section-div",
+      end: "bottom top",
+      // markers: true,
+      pin: true,
+      pinType: "transform"
+    })
+
+    gsap.to(["#container-first-section"], {
+      width: 80,
+      height: 61,
+      left: "calc(50% - 40px)",
+      top: "calc(50% + 12px)",
+      backgroundColor: "white",
+      borderStyle: "solid",
+      borderWidth: 2,
+      borderColor: "black",
+      borderRadius: 500,
+      duration: durationFirstSection,
+      scrollTrigger: {
+        trigger: "#container-first-section",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        toggleActions: "play none reverse none",
+        // markers: true,
+        // pin: true
+      }
+    }
+    )
+
+    gsap.to(["#main-video"],
+      {
+        borderRadius: 500,
+        opacity: 0,
+        duration: durationFirstSection,
+        scrollTrigger: {
+          trigger: "#container-first-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          toggleActions: "play none reverse none",
+        }
+      }
+    )
+
+
+    gsap.to(["#container-first-section"], {
+      opacity: 0,
+      duration: durationFirstSection,
+      scrollTrigger: {
+        trigger: "#second-section-div",
+        start: "top top",
+        end: "100 top",
+        scrub: true,
+        toggleActions: "play none reverse none",
+        // markers: true,
+        // pin: true
+      }
+    })
+
+
+    ScrollTrigger.create({
+      trigger: "#second-section-div",
+      start: "top top",
+      end: "bottom top",
+      markers: true,
+      pin: true,
+      // pinType: "transform"
+    })
+    gsap.to(["#second-section-div"], {
+      opacity: 1,
+      duration: durationFirstSection,
+      scrollTrigger: {
+        trigger: "#second-section-div",
+        start: "top top",
+        end: "100 top",
+        scrub: true,
+        toggleActions: "play none reverse none",
+        // markers: true,
+        // pin: true
+      }
+    })
+
+
+
   })
 
 
@@ -130,35 +270,31 @@ function App() {
             <span className='title'>imagination</span>
           </div>
         </div>
-        {/* <div id='item-list' className='item-list'>
-          <img className='image-item' src={leaf} alt="Leaf" />
-        </div>
-        <div id='item-list' className='item-list'>
-          <img className='image-item' src={leaf} alt="Leaf" />
-        </div>
-        <div id='item-list' className='item-list'>
-          <img className='image-item' src={leaf} alt="Leaf" />
-        </div> */}
-      </div>
 
+      </div>
+      {/* 
       <div className='image-person-div'>
         <img id='image-person' className='image-person' src={imagePerson} alt="Person" />
-      </div>
-
-
-      {/* <div id='second-section-div' className='second-section'>
-        <div id='item-list' className='item-list'>
-          <img className='image-item' src={leaf} alt="Leaf" />
-        </div>
-        <div id='item-list' className='item-list'>
-          <img className='image-item' src={leaf} alt="Leaf" />
-        </div>
-        <div id='item-list' className='item-list'>
-          <img className='image-item' src={leaf} alt="Leaf" />
-        </div>
       </div> */}
 
 
+      <div id='second-section-div' className='second-section'>
+        <div className='item-list'>
+          <img className='image-item' src={leaf} alt="Leaf" />
+        </div>
+        <div className='item-list'>
+          <img className='image-item' src={leaf} alt="Leaf" />
+        </div>
+        <div className='item-list center'>
+          <img className='image-item' src={leaf} alt="Leaf" />
+        </div>
+        <div className='item-list'>
+          <img className='image-item' src={leaf} alt="Leaf" />
+        </div>
+        <div className='item-list'>
+          <img className='image-item' src={leaf} alt="Leaf" />
+        </div>
+      </div>
 
       <div className='third-section'>
 
