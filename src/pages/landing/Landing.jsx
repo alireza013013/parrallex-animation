@@ -33,7 +33,15 @@ const Landing = () => {
         trigger: "#second-section-div",
         start: "top top",
         end: "100 top",
-        scrub: scubTime,
+        scrub: true,
+        toggleActions: "play none reverse none",
+    }
+
+
+    const triggerSecondItemOpen = {
+        trigger: "#relative-div-active",
+        start: "top top",
+        end: "top top",
         toggleActions: "play none reverse none",
     }
 
@@ -55,14 +63,13 @@ const Landing = () => {
             endTrigger: "#second-section-div",
             end: "bottom top",
             pin: true,
-            pinType: "transform"
         })
 
         gsap.to(["#container-first-section"], {
             width: window.innerWidth < 768 ? 50 : 80,
             height: window.innerWidth < 768 ? 40 : 60,
-            left: window.innerWidth < 768 ? "calc(50% - 28px)" : "calc(50% - 42px)",
-            top: window.innerWidth < 768 ? "calc(50% + 26px)" : "calc(50% + 12px)",
+            left: window.innerWidth < 768 ? "calc(50% - 28px)" : "calc(50% - 40px)",
+            top: window.innerWidth < 768 ? "calc(50% + 26px)" : "calc(50% - 30px)",
             backgroundColor: "white",
             borderStyle: "solid",
             borderWidth: 2,
@@ -70,7 +77,7 @@ const Landing = () => {
             borderRadius: window.innerWidth < 768 ? 20 : 30,
             duration: durationFirstSection,
             scrollTrigger: {
-                ...triggerFirstSectio
+                ...triggerFirstSectio,
             }
         }
         )
@@ -89,9 +96,17 @@ const Landing = () => {
 
         gsap.to(["#container-first-section"], {
             opacity: 0,
-            duration: durationFirstSection,
+            duration: 0.5,
             scrollTrigger: {
-                ...triggerBetweenFistSecond
+                ...triggerBetweenFistSecond,
+                onEnterBack: () => {
+                    const element = document.getElementById("container-first-section")
+                    element.style.opacity = "0"
+                    element.style.width = window.innerWidth < 768 ? "50px" : "80px";
+                    element.style.height = window.innerWidth < 768 ? "40px" : "60px";
+                    element.style.left = window.innerWidth < 768 ? "calc(50% - 28px)" : "calc(50% - 40px)";
+                    element.style.top = window.innerWidth < 768 ? "calc(50% + 26px)" : "calc(50% - 30px)";
+                },
             }
         })
 
@@ -100,14 +115,66 @@ const Landing = () => {
             trigger: "#second-section-div",
             start: "top top",
             end: "bottom top",
-            markers: true,
             pin: true,
+            pinType: "fixed",
+            onLeave: () => {
+                const element = document.getElementById("container-first-section")
+                element.style.opacity = "0"
+                element.style.width = window.innerWidth < 768 ? "50px" : "80px";
+                element.style.height = window.innerWidth < 768 ? "40px" : "60px";
+                element.style.left = window.innerWidth < 768 ? "calc(50% - 28px)" : "calc(50% - 40px)";
+                element.style.top = window.innerWidth < 768 ? "calc(50% + 26px)" : "calc(50% - 30px)";
+            },
         })
         gsap.to(["#second-section-div"], {
             opacity: 1,
-            duration: durationFirstSection,
+            duration: 0.1,
             scrollTrigger: {
                 ...triggerBetweenFistSecond
+            }
+        })
+
+        ScrollTrigger.create({
+            trigger: "#relative-div-active",
+            start: "top top",
+            end: "bottom top",
+            onEnter: () => {
+                console.log("enter");
+            },
+            onLeave: () => {
+                console.log("leave");
+            }
+        })
+
+        const itemActiveId = menuItems.filter((item) => item.active)[0].id
+        gsap.to(["#relative-div-active"], {
+            width: 290,
+            duration: 0.5,
+            scrollTrigger: {
+                ...triggerSecondItemOpen,
+                id: `triiger-relative-div${itemActiveId}`
+            }
+        })
+
+        gsap.to(["#image-item-active"], {
+            translateX: -145,
+            translateY: -30,
+            position: "absolute",
+            scale: 1.3,
+            duration: 0.5,
+            scrollTrigger: {
+                ...triggerSecondItemOpen,
+                id: `triiger-image${itemActiveId}`
+            }
+        })
+
+        gsap.to(["#item-title-active"], {
+            scale: 1,
+            duration: 0.5,
+            delay: 1,
+            scrollTrigger: {
+                ...triggerSecondItemOpen,
+                id: `triiger-title${itemActiveId}`
             }
         })
 
@@ -121,35 +188,35 @@ const Landing = () => {
     const [menuItems, setMenuItems] = useState([
         {
             id: 1,
-            title: "test 1",
+            title: "Lovely visualize for interior design1",
             img: wolf,
             active: false,
             color: "blue"
         },
         {
             id: 2,
-            title: "test 2",
+            title: "Lovely visualize for interior design1",
             img: flower,
             active: false,
             color: "red"
         },
         {
             id: 3,
-            title: "test 3",
+            title: "Lovely visualize for interior design1",
             img: leaf,
             active: true,
             color: "white"
         },
         {
             id: 4,
-            title: "test 4",
+            title: "Lovely visualize for interior design1",
             img: orangeIcon,
             active: false,
             color: "orange"
         },
         {
             id: 5,
-            title: "test 5",
+            title: "Lovely visualize for interior design1",
             img: cloud,
             active: false,
             color: "green"
@@ -180,14 +247,112 @@ const Landing = () => {
         }
     }
     const leave = (event, item) => {
-        const element = document.getElementById(item.id)
-        const elementImage = document.getElementById(`item-menu-${item.id}`)
-        gsap.to([element, elementImage], {
-            x: 0,
-            y: 0,
-            scale: 1,
-            duration: 0.5,
-        })
+        if (!item.active) {
+            const element = document.getElementById(item.id)
+            const elementImage = document.getElementById(`item-menu-${item.id}`)
+            gsap.to([element, elementImage], {
+                x: 0,
+                y: 0,
+                scale: 1,
+                duration: 0.5,
+            })
+        }
+    }
+
+
+    const changeActive = (item) => {
+        if (!item.active) {
+            gsap.to(["#item-title-active"], {
+                scale: 0,
+                duration: 0.5,
+            })
+            gsap.to(["#relative-div-active"], {
+                width: 80,
+                duration: 0.5,
+            })
+
+            gsap.to(["#image-item-active"], {
+                translateX: 0,
+                translateY: 0,
+                position: "absolute",
+                scale: 1,
+                duration: 0.5,
+            })
+
+            const element = document.getElementById(item.id)
+            const elementImage = document.getElementById(`item-menu-${item.id}`)
+            gsap.to([element, elementImage], {
+                x: 0,
+                y: 0,
+                scale: 1,
+                duration: 0.5,
+            })
+            const itemActiveId = menuItems.filter((item) => item.active)[0].id
+            ScrollTrigger.getById(`triiger-relative-div${itemActiveId}`).disable()
+            ScrollTrigger.getById(`triiger-image${itemActiveId}`).disable()
+            ScrollTrigger.getById(`triiger-title${itemActiveId}`).disable()
+            setMenuItems((prevItems) =>
+                prevItems.map((menuItem) => ({
+                    ...menuItem,
+                    active: menuItem.id === item.id,
+                }))
+            );
+
+            setTimeout(() => {
+                gsap.to(["#relative-div-active"], {
+                    width: 290,
+                    translateX: 0,
+                    translateY: 0,
+                    duration: 0.5,
+                })
+
+                gsap.to(["#image-item-active"], {
+                    translateX: -145,
+                    translateY: -30,
+                    position: "absolute",
+                    scale: 1.3,
+                    duration: 0.5,
+                })
+
+                gsap.to(["#item-title-active"], {
+                    scale: 1,
+                    duration: 0.5,
+                    delay: 1,
+                })
+
+
+                gsap.to(["#relative-div-active"], {
+                    width: 290,
+                    duration: 0.5,
+                    scrollTrigger: {
+                        ...triggerSecondItemOpen,
+                        id: `triiger-relative-div${item.id}`
+                    }
+                })
+
+                gsap.to(["#image-item-active"], {
+                    translateX: -145,
+                    translateY: -30,
+                    position: "absolute",
+                    scale: 1.3,
+                    duration: 0.5,
+                    scrollTrigger: {
+                        ...triggerSecondItemOpen,
+                        id: `triiger-image${item.id}`
+                    }
+                })
+
+                gsap.to(["#item-title-active"], {
+                    scale: 1,
+                    duration: 0.5,
+                    delay: 1,
+                    scrollTrigger: {
+                        ...triggerSecondItemOpen,
+                        id: `triiger-title${item.id}`
+                    }
+                })
+            }, 100);
+        }
     }
 
 
@@ -225,47 +390,24 @@ const Landing = () => {
                 {
                     menuItems.map((item) =>
                         <div
-                            key={item.id} className='relative-div'>
+                            key={item.id} className='relative-div'
+                            id={item.active ? "relative-div-active" : ""}
+                            onClick={() => changeActive(item)}
+                        >
                             <div
                                 onMouseMove={(event) => enter(event, item)}
                                 onMouseLeave={(event) => leave(event, item)}
                                 className={`item-list ${item.active ? `center` : ``}`}
-                                id={item.id}>
-                                <img id={`item-menu-${item.id}`} className='image-item' src={item.img} alt={item.title} />
+                                id={item.active ? "item-active" : item.id}
+                            >
+                                <img id={item.active ? `image-item-active` : `item-menu-${item.id}`} className='image-item' src={item.img} alt={item.title} />
+                                {
+                                    item.active && <span id='item-title-active' className='item-title'>{item.title}</span>
+                                }
                             </div>
                         </div>
                     )
                 }
-                {/* <div
-                    onPointerMove={(event) => enter(event, "1")}
-                    onPointerLeave={(event) => leave(event, "1")}
-                    className='item-list'>
-                    <img id='1' className='image-item' src={cloud} alt="Leaf" />
-                </div>
-                <div
-                    onPointerMove={(event) => enter(event, "2")}
-                    onPointerLeave={(event) => leave(event, "2")}
-                    className='item-list'>
-                    <img id='2' className='image-item' src={flower} alt="Leaf" />
-                </div>
-                <div
-                    onPointerMove={(event) => enter(event, "3")}
-                    onPointerLeave={(event) => leave(event, "3")}
-                    className='item-list center'>
-                    <img id='3' className='image-item' src={leaf} alt="Leaf" />
-                </div>
-                <div
-                    onPointerMove={(event) => enter(event, "4")}
-                    onPointerLeave={(event) => leave(event, "4")}
-                    className='item-list'>
-                    <img id='4' className='image-item' src={orangeIcon} alt="Leaf" />
-                </div>
-                <div
-                    onPointerMove={(event) => enter(event, "5")}
-                    onPointerLeave={(event) => leave(event, "5")}
-                    className='item-list'>
-                    <img id='5' className='image-item' src={wolf} alt="Leaf" />
-                </div> */}
             </div>
 
             <div className='third-section'>
